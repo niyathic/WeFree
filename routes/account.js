@@ -40,19 +40,19 @@ router.post('/login', function (req, res, next) {
     const password = req.body.password;
     console.log(req.body);
     User.findOne({ username: username, password: password }, function (err, result) {
-        if (err) { 
-            res.send('incorrect SON! ' + err.message);
+        if (err) {
+            res.send('An error occurred: ' + err.message);
             return;
         } if (!result) {
             req.session.isAuthenticated = false;
-            res.send('incorrect credentials SON');
+            res.send('Incorrect credentials. Please try again.');
             return;
         } if (result.password === password) {
             req.session.user = result.username;
             req.session.isAuthenticated = true;
-            res.send('hiiiiiiiiiiii u r logged in');
+            res.redirect('/');
             return;
-        }       
+        }
     })
 })
 
