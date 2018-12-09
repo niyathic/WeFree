@@ -1,10 +1,13 @@
 var express = require('express');
 var path = require('path');
-/ar bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 //var cookieSession = require('cookie-session');
 var isAuthenticated = require('./middlewares/isAuthenticated');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var Event = require('./models/event');
+var Timeslot = require('./models/timeslot');
+var nodemailer = require('nodemailer');
 
 var app = express();
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/WeFree') //mongoose connect call
@@ -18,11 +21,18 @@ app.set('view engine', 'html');
 
 
 app.get('/', function (req, res, next) {
-    //todo
+    res.render('landing');
 });
 
 app.post('/', isAuthenticated, function (req, res, next) {
-    //todo
+    if (req.body === 'Sign up') {
+        res.redirect('/signup');
+        return;
+    } else if (req.body === 'Log in') {
+        res.redirect('/login');
+        return;
+    }
+    return;
 });
 
 // Signup
@@ -35,11 +45,21 @@ app.get('/signup', function (req, res, next) {
 });
 
 app.post('/signup', function (req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
-    var user = new User({ username: username, password: password });
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const googleIntegrated = req.body.googleIntegrated.checked;
+    const user = new User({ name: name, email: email, password: password, googleIntegrated: googleIntegrated, events: []});
     user.save(function (err, results) {
         if (!err) {
+            // send email confirming signup
+            transporter.sendMail(mailOptions(email), function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
             res.redirect('/'); //redirect back to home page
             return;
         } else {
@@ -54,10 +74,10 @@ app.get('/login', function (req, res, next) {
     res.render('login');
 })
 app.post('/login', function (req, res, next) {
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
     console.log(req.body);
-    User.findOne({ username: username, password: password }, function (err, result) {
+    User.findOne({ email: email, password: password }, function (err, result) {
         if (err) {
             res.send('An error occurred: ' + err.message);
             return;
@@ -78,4 +98,32 @@ app.post('/login', function (req, res, next) {
 app.get('/logout', isAuthenticated, function (req, res, next) {
     req.session.user = '';
     res.redirect('/');
+})
+
+// Sending signup confirmation email
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'wefree.scheduler@gmail.com',
+        pass: 'whittaker'
+    }
+});
+
+var mailOptions (recipient) = {
+    from: 'wefree.scheduler@gmail.com',
+    to: recipient,
+    subject: 'Thanks for joining WeFree!',
+    html: '<h1>Welcome to WeFree!</h1><p>We are so excited that you\'ve joined us. With WeFree, you can <b>schedule group events with ease</b>. If you are receiving this email by mistake, <a href="/delete">let us know.</a></p>'
+};
+
+// Delete account
+app.get('/delete', function (req, res, next) {
+    res.render('delete');
+})
+
+app.post('/delete', function (req, res, next) {
+    if (User.findOne({ email: req.body.deleteEmail })) {
+        User.remove({ email: req.body.deleteEmail });
+    }
+    return;
 })
