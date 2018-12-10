@@ -30,6 +30,8 @@ export default class Dashboard extends Component {
     const events = []
     return ( 
       <Router>
+        {/* only one child element */}
+        <div>
         {/* Navigation */}
         <Navbar color="stylish-color-dark" dark expand="md">
           <NavbarBrand>
@@ -70,6 +72,7 @@ export default class Dashboard extends Component {
             onSelectSlot = {this.selectSlot}
           />
         </div>
+      </div>
       </div>
       {/* <Route path='/newEvent' component = {newEvent}/> */}
       </Router>
