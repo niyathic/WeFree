@@ -49,18 +49,24 @@ app.post('/signup', function (req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
     const googleIntegrated = req.body.googleIntegrated.checked;
-    const user = new User({ name: name, email: email, password: password, googleIntegrated: googleIntegrated, events: []});
+    const user = new User({ name: name, email: email, password: password, googleIntegrated: googleIntegrated, events: [] });
+    var mailOptions = {
+        from: 'wefree.scheduler@gmail.com',
+        to: email,
+        subject: 'Thanks for joining WeFree!',
+        html: '<h1>Welcome to WeFree!</h1><p>We are so excited that you\'ve joined us. With WeFree, you can <b>schedule group events with ease</b>. If you are receiving this email by mistake, <a href="/delete">let us know.</a></p>'
+    };
     user.save(function (err, results) {
         if (!err) {
             // send email confirming signup
-            transporter.sendMail(mailOptions(email), function (error, info) {
+            transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.log(error);
                 } else {
                     console.log('Email sent: ' + info.response);
                 }
             });
-            res.redirect('/'); //redirect back to home page
+            res.redirect('/');
             return;
         } else {
             res.send(err.message);
@@ -108,13 +114,6 @@ var transporter = nodemailer.createTransport({
         pass: 'whittaker'
     }
 });
-
-var mailOptions (recipient) = {
-    from: 'wefree.scheduler@gmail.com',
-    to: recipient,
-    subject: 'Thanks for joining WeFree!',
-    html: '<h1>Welcome to WeFree!</h1><p>We are so excited that you\'ve joined us. With WeFree, you can <b>schedule group events with ease</b>. If you are receiving this email by mistake, <a href="/delete">let us know.</a></p>'
-};
 
 // Delete account
 app.get('/delete', function (req, res, next) {
