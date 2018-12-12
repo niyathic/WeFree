@@ -1,0 +1,42 @@
+{
+  "name": "wefree",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "bootstrap-css": "^4.0.0-alpha.5",
+    "bootstrap-css-only": "^4.1.3",
+    "datepicker": "0.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "font-awesome": "^4.7.0",
+    "googleapis": "^27.0.0",
+    "mdbreact": "^4.8.5-patch.1",
+    "mongoose": "^5.3.16",
+    "nodemailer": "^4.7.0",
+    "react": "^16.6.3",
+    "react-big-calendar": "^0.20.2",
+    "react-dates": "^18.3.0",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1",
+    "react-schedule-selector": "^1.0.3",
+    "react-scripts": "^2.1.1",
+    "readline": "^1.3.0",
+    "styled-components": "^4.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
