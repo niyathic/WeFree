@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var User = require('./models/user');
 var Event = require('./models/event');
 var Timeslot = require('./models/timeslot');
+var nodemailer = require('nodemailer');
 //var accountRoutes = require('./routes/account');
 
 var app = express();
@@ -27,7 +28,7 @@ app.listen(process.env.PORT || 3000, function () {
 // set the express view engine to take care of ejs within html files
 app.engine('html', require('ejs').__express);
 
-//app.set('views', path.join(__dirname, '/public'));
+app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'html');
 //todo cookie session?
 
@@ -35,8 +36,7 @@ app.set('view engine', 'html');
 
 
 app.get('/', function (req, res, next) {
-    console.log(req)
-    //res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/', isAuthenticated, function (req, res, next) {
