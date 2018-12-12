@@ -3,18 +3,21 @@ import React from 'react';
 import DateRangePicker from '/datepicker.js';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-class timeSelect extends React.Component {
+export default class timeSelect extends React.Component {
   state = { schedule = [] }
 
   handleChange = newSchedule => {
     this.setState({ schedule: newSchedule })
-    //schedule is array list of dates that are filled in...
+    //schedule is array list of dates that are filled in...post to db?
   }
 
   render() {
     return (
       <Router>
         <div>
+          <div>
+            <h1>Select available times.</h1>
+          </div>
           <ScheduleSelector
             selection={this.state.schedule}
             startDate={DateRangePicker.startDate}

@@ -10,7 +10,12 @@ import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse } from
 const localizer = BigCalendar.momentLocalizer(moment);
 
 export default class Dashboard extends Component {
-
+  constructor() {
+    super();
+  }
+  componentWillMount() {
+    //check to see if there are events/selections already
+  }
   selectSlot = ({start, end}) => {
     const title = window.prompt('New Event Name')
     if (title) {
@@ -51,7 +56,7 @@ export default class Dashboard extends Component {
         <div className="container-fluid">
           <div className="h-100 p-5">
             <h1>hey bb u free?</h1>
-            {/* <button><Link to='/newevent'>Create Event</Link></button>  */}
+            <button><Link to='/newevent'>Create Event</Link></button> 
           </div>
         </div>
 

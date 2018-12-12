@@ -23,7 +23,7 @@ export default class NewEvent extends Component {
           </div>
         </div>
         <DateRangePicker/>
-        <Link to='/timeslotSelect'><button>Next</button></Link>
+        <button><Link to='/timeslotSelect'>Next</Link></button>
         </div>
 
       </Router>

@@ -9,7 +9,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css'; 
 import 'mdbreact/dist/css/mdb.css';
 
-
+//includes routes
 class App extends Component {
   render () { 
     const App = () => (
