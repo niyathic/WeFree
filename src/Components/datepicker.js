@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
-//todo error - duplicate
-class DateRangePicker extends Component {
+
+export default class DRP extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,5 +30,3 @@ class DateRangePicker extends Component {
     );
   }
 }
-
-export default DateRangePicker;

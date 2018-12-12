@@ -1,7 +1,7 @@
 import ScheduleSelector from 'react-schedule-selector';
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-//import DateRangePicker from '../Components/datepicker'
+import DRP from '../Components/datepicker'
 
 export default class TimeslotSelect extends Component {
   state = { schedule: [] }
@@ -17,10 +17,8 @@ export default class TimeslotSelect extends Component {
         <div>
           <ScheduleSelector
             selection={this.state.schedule}
-            //startDate={DateRangePicker.startDate}
-            //endDate={DateRangePicker.startDate}
-            startDate={"01011900"} //todo delete
-            endDate={"01021900"} //todo delete
+            startDate={DRP.startDate}
+            endDate={DRP.startDate}
             numDays={5}
             minTime={8}
             maxTime={22}

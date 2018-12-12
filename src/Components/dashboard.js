@@ -37,14 +37,6 @@ export default class Dashboard extends Component {
           <NavbarBrand>
             <strong color="blue-grey darken-3">WeFree</strong>
           </NavbarBrand>
-          <NavbarToggler
-            onClick={this.toggleCollapse}
-          />
-          <Collapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-            <NavbarNav right>
-              <NavItem active><NavLink to="/landing">Log Out</NavLink></NavItem>
-            </NavbarNav>
-          </Collapse>
         </Navbar>
         {/* End Navigation */}
       <div className="landing">
