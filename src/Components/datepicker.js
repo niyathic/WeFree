@@ -3,7 +3,7 @@ import './App.css';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
-
+//todo error - duplicate
 class DateRangePicker extends Component {
   constructor(props) {
     super(props);

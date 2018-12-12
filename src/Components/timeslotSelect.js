@@ -1,8 +1,7 @@
 import ScheduleSelector from 'react-schedule-selector';
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-//import DateRangePicker as '/datepicker.js' //this doesn't work either
-//const DateRangePicker = require('./Components/datepicker.js'); todo fix this
+//import DateRangePicker from '../Components/datepicker'
 
 export default class TimeslotSelect extends Component {
   state = { schedule: [] }
